@@ -37,6 +37,7 @@ parameters:
 steps:
   - run:
       name: "kaniko-publish: build and push container"
+      no_output_timeout: 30m
       shell: /bin/bash -e
       command: >-
         /kaniko/executor
