@@ -6,11 +6,11 @@ parameters:
   image_repository:
     description: Docker image tag to pull for execution
     type: string
-    default: cimg/python:3.8
+    default: cimg/python
   image_tag:
     description: Image tag to pull for execution
     type: string
-    default: latest
+    default: 3.8
 resource_class: medium
 working_directory: << parameters.working_directory >>
 docker:
