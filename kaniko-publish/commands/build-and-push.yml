@@ -16,10 +16,10 @@ parameters:
     description: Value for tag to use. Defaults to $CIRCLE_SHA1.
     type: string
     default: $CIRCLE_SHA1
-  cache:
-    description: Whether or not to cache layers of the Docker image being built
-    type: boolean
-    default: false
+  cache_repo:
+    description:  Specify a repository to use as a cache, otherwise one will be inferred from the destination provided
+    type: string
+    default: ""
   extra_build_args:
     description: >
       Extra flags to pass to kaniko/executor. For examples, see
@@ -43,9 +43,7 @@ steps:
         --dockerfile "<< parameters.dockerfile >>"
         --context "<< parameters.path >>"
         --destination "<< parameters.image >>:<< parameters.tag >>"
-        <<^parameters.cache>>
-        --cache
-        <</parameters.cache>>
+        --cache-repo "<< parameters.cache_repo >>"
         <<^parameters.deploy>>
         --no-push
         <</parameters.deploy>>

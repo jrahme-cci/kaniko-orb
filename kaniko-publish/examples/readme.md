@@ -54,7 +54,7 @@ usage:
     build_and_publish_image:
       jobs:
         - kaniko-publish/publish:
-            cache: true
+            cache_repo: "myorg/repo"
 ```
 
 ## Custom name and tag

@@ -38,10 +38,10 @@ parameters:
     description: Whether or not to run the check for Docker registry variables and configuration
     type: boolean
     default: true
-  cache:
-    description: Whether or not to cache layers of the Docker image being built
-    type: boolean
-    default: false
+  cache_repo:
+    description: Specify a repository to use as a cache, otherwise one will be inferred from the destination provided
+    type: string
+    default: ""
   deploy:
     description: Whether or not to push image to the Docker image repository.
     type: boolean
@@ -70,7 +70,7 @@ steps:
       path: << parameters.path >>
       image: << parameters.image >>
       tag: << parameters.tag >>
-      cache: << parameters.cache >>
+      cache_repo: << parameters.cache_repo >>
       extra_build_args: << parameters.extra_build_args >>
       deploy: << parameters.deploy >>
       tar_path: << parameters.tar_path >>
