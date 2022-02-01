@@ -4,8 +4,6 @@ FROM gcr.io/kaniko-project/executor:v1.7.0 as builder
 FROM debian:11-slim
 
 COPY --from=builder /kaniko /kaniko
-RUN apt-get update \
-    && apt-get install git openssh -y
 RUN echo "{}" > /kaniko/.docker/config.json
 
 ENV PATH="$PATH:/kaniko" \
