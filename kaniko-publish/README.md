@@ -14,7 +14,7 @@ Under the hood this uses Google's [Kaniko](https://github.com/GoogleContainerToo
 
 ## Usage
 
-See https://github.com/dre2004/orbs/tree/master/kaniko-publish for the full details.
+See https://github.com/dre2004/orbs/tree/main/kaniko-publish for the full details.
 
 ```
 orbs:
