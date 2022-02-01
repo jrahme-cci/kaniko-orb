@@ -6,11 +6,11 @@ parameters:
   image_repository:
     description: Docker image tag to pull for execution
     type: string
-    default: cimg/python
+    default: dre2004/kaniko-executor
   image_tag:
     description: Image tag to pull for execution
     type: string
-    default: "3.8"
+    default: latest
 resource_class: medium
 working_directory: << parameters.working_directory >>
 docker:
