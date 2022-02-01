@@ -1,0 +1,70 @@
+version: 2.1
+
+orbs:
+  orb-tools: circleci/orb-tools@10.1.0
+
+# Common anchors
+only_master_branch: &only_master_branch
+  filters:
+    branches:
+      only:
+        - main
+
+workflows:
+  version: 2.1
+
+  check_and_publish_dev:
+    jobs:
+      - orb-tools/lint
+
+      # Kaniko Publish
+      - orb-tools/pack:
+          name: Pack kaniko-publish
+          source-dir: kaniko-publish/
+          destination-orb-path: orb.yml
+          workspace-path: orb.yml
+          artifact-path: orb.yml
+          requires:
+            - orb-tools/lint
+      - orb-tools/publish-dev:
+          name: Publish kaniko-publish dev release
+          orb-name: freeletics/kaniko-publish
+          orb-path: workspace/orb.yml
+          requires:
+            - "Pack kaniko-publish"
+      - "kaniko-publish patch release":
+          type: approval
+          requires:
+            - "Publish kaniko-publish dev release"
+          <<: *only_master_branch
+      - orb-tools/dev-promote-prod:
+          name: "Publish kaniko-publish patch release"
+          orb-name: freeletics/kaniko-publish
+          publish-version-tag: false
+          release: patch
+          requires:
+            - "kaniko-publish patch release"
+      - "kaniko-publish minor release":
+          type: approval
+          requires:
+            - "Publish kaniko-publish dev release"
+          <<: *only_master_branch
+      - orb-tools/dev-promote-prod:
+          name: "Publish kaniko-publish minor release"
+          orb-name: freeletics/kaniko-publish
+          publish-version-tag: false
+          release: minor
+          requires:
+            - "kaniko-publish minor release"
+      - "kaniko-publish major release":
+          type: approval
+          requires:
+            - "Publish kaniko-publish dev release"
+          <<: *only_master_branch
+      - orb-tools/dev-promote-prod:
+          name: "Publish kaniko-publish major release"
+          orb-name: freeletics/kaniko-publish
+          publish-version-tag: false
+          release: major
+          requires:
+            - "kaniko-publish major release"
