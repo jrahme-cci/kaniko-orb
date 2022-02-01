@@ -43,7 +43,9 @@ steps:
         --dockerfile "<< parameters.dockerfile >>"
         --context "<< parameters.path >>"
         --destination "<< parameters.image >>:<< parameters.tag >>"
-        --cache << parameters.cache >>
+        <<^parameters.cache>>
+        --cache
+        <</parameters.cache>>
         <<^parameters.deploy>>
         --no-push
         <</parameters.deploy>>
