@@ -37,7 +37,7 @@ parameters:
 steps:
   - run:
       name: "kaniko-publish: build and push container"
-      shell: /bin/sh -uxeo pipefail
+      shell: /bin/bash -e
       command: >-
         /kaniko/executor
         --dockerfile "<< parameters.dockerfile >>"
