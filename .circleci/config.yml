@@ -71,3 +71,4 @@ workflows:
           release: major
           requires:
             - "kaniko-publish major release"
+
