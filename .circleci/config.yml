@@ -25,7 +25,7 @@ workflows:
 
       - orb-tools/publish-dev:
           name: Publish kaniko-publish dev release
-          orb-name: devopstools/kaniko-publish
+          orb-name: jrahme-cci/kaniko-publish
           orb-path: workspace/orb.yml
           requires:
             - "Pack kaniko-publish"
@@ -38,7 +38,7 @@ workflows:
 
       - orb-tools/dev-promote-prod:
           name: "Publish kaniko-publish patch release"
-          orb-name: devopstools/kaniko-publish
+          orb-name: jrahme-cci/kaniko-publish
           publish-version-tag: false
           release: patch
           requires:
@@ -52,7 +52,7 @@ workflows:
 
       - orb-tools/dev-promote-prod:
           name: "Publish kaniko-publish minor release"
-          orb-name: devopstools/kaniko-publish
+          orb-name: jrahme-cci/kaniko-publish
           publish-version-tag: false
           release: minor
           requires:
@@ -66,7 +66,7 @@ workflows:
 
       - orb-tools/dev-promote-prod:
           name: "Publish kaniko-publish major release"
-          orb-name: devopstools/kaniko-publish
+          orb-name: jrahme-cci/kaniko-publish
           publish-version-tag: false
           release: major
           requires:
